@@ -145,6 +145,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common.h" />
     <ClInclude Include="GeneticEngine.h" />
     <ClInclude Include="Objects.h" />
     <ClInclude Include="stdafx.h" />

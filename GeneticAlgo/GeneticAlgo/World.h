@@ -14,5 +14,6 @@ private:
     static World m_Instance;
     bool m_Stop;
     Vector2ui m_Size;
+    std::vector<std::vector<char>> m_Map;
 };
 
