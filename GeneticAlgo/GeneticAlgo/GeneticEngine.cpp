@@ -73,41 +73,121 @@ void GeneticEngine::CreateGeniration(const GenerationParams & params)
             }
             break;
         default:
-            throw L"Unknown object type";
+            throw std::logic_error("Unknown object type");
     }
 }
 
 void GeneticEngine::Reproduce()
 {
-    //Mutation();
+    Object * obj = nullptr;
+
+    // flowers
+    auto values = GetObjectsByType(m_Objects, ObjType::Flower);
+    std::sort(values->begin(), values->end(), [](const std::pair<size_t, int> &left, const std::pair<size_t, int> &right)-> bool { return left.second < right.second; });
+    for (size_t i = values->size() - 1; i >= values->size() / 2; i--)
+    {
+        obj = Mutation(m_Objects[(*values)[i].first]);
+        m_NewObjects.push_back(obj);
+    }
+    delete values;
+    values = nullptr;
+
+    // Sheeps
+    values = GetObjectsByType(m_Objects, ObjType::Sheep);
+    std::sort(values->begin(), values->end(), [](const std::pair<size_t, int> &left, const std::pair<size_t, int> &right)-> bool { return left.second < right.second; });
+    for (size_t i = values->size() - 1; i >= values->size() / 2; i--)
+    {
+        obj = Mutation(m_Objects[(*values)[i].first]);
+        m_NewObjects.push_back(obj);
+    }
+    delete values;
+    values = nullptr;
+
+    // Wolves
+    values = GetObjectsByType(m_Objects, ObjType::Wolf);
+    std::sort(values->begin(), values->end(), [](const std::pair<size_t, int> &left, const std::pair<size_t, int> &right)-> bool { return left.second < right.second; });
+    for (size_t i = values->size() - 1; i >= values->size() / 2; i--)
+    {
+        obj = Mutation(m_Objects[(*values)[i].first]);
+        m_NewObjects.push_back(obj);
+    }
 }
 
 void GeneticEngine::Selection()
 {
+    auto values = GetObjectsByType(m_Objects, ObjType::Flower);
+    size_t idx = -1;
+    for (size_t i = 0; i < values->size() / 2; i++)
+    {
+        idx = rand() % values->size() + 1;
+        m_NewObjects.push_back(m_Objects[(*values)[idx].first]);
+    }
+    delete values;
+    values = nullptr;
+
+    values = GetObjectsByType(m_Objects, ObjType::Sheep);
+    idx = -1;
+    for (size_t i = 0; i < values->size() / 2; i++)
+    {
+        idx = rand() % values->size() + 1;
+        m_NewObjects.push_back(m_Objects[(*values)[idx].first]);
+    }
+    delete values;
+    values = nullptr;
+
+    values = GetObjectsByType(m_Objects, ObjType::Wolf);
+    idx = -1;
+    for (size_t i = 0; i < values->size() / 2; i++)
+    {
+        idx = rand() % values->size() + 1;
+        m_NewObjects.push_back(m_Objects[(*values)[idx].first]);
+    }
+
 }
 
 bool GeneticEngine::CheckSolution()
 {
+    // to do
     return false;
 }
 
 Object * GeneticEngine::Mutation(const Object * obj)
 {
+    const auto & pos = obj->GetPosition();
+    const auto & params = obj->GetParams();
+
     std::unique_ptr<Object> newObject(nullptr);
     switch (obj->GetType())
     {
     case ObjType::Flower:
-        // they have no any mutation
+        // find free place for new object
+        // copy params
         break;
     case ObjType::Sheep:
-
+        // make mutation
+        // copy other params
         break;
     case ObjType::Wolf:
-
+        // make mutation
+        // copy other params
         break;
     default:
-        return nullptr;
+        throw std::logic_error("Unknown object type");
     }
 
     return newObject.release();
+}
+
+std::vector<std::pair<size_t, int>> * GeneticEngine::GetObjectsByType(const std::vector<Object *> & objects, const ObjType & type)
+{
+    std::vector<std::pair<size_t, int>> * values = new std::vector<std::pair<size_t, int>>();
+    for (size_t i = 0; i < objects.size(); i++)
+    {
+        if (m_Objects[i]->IsAlive() && m_Objects[i]->GetType() == type)
+        {
+            values->push_back(std::make_pair(i, objects[i]->GetValueObject()));
+        }
+    }
+
+    return values;
 }

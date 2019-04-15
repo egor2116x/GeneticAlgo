@@ -9,8 +9,10 @@ public:
     virtual bool Action() = 0;
     virtual bool IsAlive() const { return m_Params.health > 0; }
     const ObjType & GetType() const { return m_Params.type; }
+    virtual int GetValueObject() = 0;
     const Vector2ui & GetPosition() const { return m_Params.pos; }
     void SetPosition(const Vector2ui & pos) { m_Params.pos.x = pos.x; m_Params.pos.y = pos.y; }
+    const ObjParams & GetParams() const { return m_Params; }
     virtual ~Object() {}
 protected:
     ObjParams m_Params;
@@ -23,6 +25,7 @@ public:
     // Inherited via Object
     virtual bool Move() override;
     virtual bool Action() override;
+    virtual int GetValueObject() override;
 };
 
 class Sheep : public Object
@@ -32,6 +35,7 @@ public:
     // Inherited via Object
     virtual bool Move() override;
     virtual bool Action() override;
+    virtual int GetValueObject() override;
 };
 
 class Wolf : public Object
@@ -41,4 +45,5 @@ public:
     // Inherited via Object
     virtual bool Move() override;
     virtual bool Action() override;
+    virtual int GetValueObject() override;
 };

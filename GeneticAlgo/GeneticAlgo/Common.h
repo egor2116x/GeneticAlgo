@@ -6,6 +6,9 @@ const int g_ObjSpeedDefault = 1;
 const int g_ObjHealthDefault = 1;
 const unsigned WORLD_WIDTH = 90;
 const unsigned WORLD_HEIGHT = 28;
+const size_t flowersGenSize = 10;
+const size_t SheepsGenSize = 10;
+const size_t WolvesGenSize = 10;
 
 struct Vector2ui
 {

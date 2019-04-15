@@ -15,5 +15,7 @@ private:
     bool m_Stop;
     Vector2ui m_Size;
     std::vector<std::vector<char>> m_Map;
+    size_t m_Steps;
+    const size_t m_MaxStepsForCreateNewGen = 5;
 };
 

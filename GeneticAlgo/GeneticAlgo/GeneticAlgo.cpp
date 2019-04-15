@@ -13,15 +13,15 @@ int main()
 
         GenerationParams flowerParams;
         flowerParams.type = ObjType::Flower;
-        flowerParams.generationSize = 10;
+        flowerParams.generationSize = flowersGenSize;
 
         GenerationParams SheepParams;
         SheepParams.type = ObjType::Sheep;
-        SheepParams.generationSize = 10;
+        SheepParams.generationSize = SheepsGenSize;
 
         GenerationParams WolfParams;
         WolfParams.type = ObjType::Wolf;
-        WolfParams.generationSize = 10;
+        WolfParams.generationSize = WolvesGenSize;
 
         world.CreateGeniration(flowerParams);
         world.CreateGeniration(SheepParams);

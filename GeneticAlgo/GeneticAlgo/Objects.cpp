@@ -32,6 +32,11 @@ bool Sheep::Action()
     return false;
 }
 
+int Sheep::GetValueObject()
+{
+    return 0;
+}
+
 bool Wolf::Move()
 {
     return false;
@@ -42,12 +47,24 @@ bool Wolf::Action()
     return false;
 }
 
+int Wolf::GetValueObject()
+{
+    return 0;
+}
+
 bool Flower::Move()
 {
+    // they can't move
     return false;
 }
 
 bool Flower::Action()
 {
+    // they have no any actions
     return false;
+}
+
+int Flower::GetValueObject()
+{
+    return 0;
 }

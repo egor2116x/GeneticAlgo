@@ -2,7 +2,7 @@
 
 World World::m_Instance;
 
-World::World() : m_Stop(false), m_Size({WORLD_WIDTH, WORLD_HEIGHT})
+World::World() : m_Stop(false), m_Size({WORLD_WIDTH, WORLD_HEIGHT}), m_Steps(0)
 {
     std::srand(time(0));
     m_Map.resize(WORLD_HEIGHT);
@@ -64,8 +64,11 @@ void World::Update()
         }
     }
 
-    void Reproduce();
-    void Selection();
+    if (m_Steps % m_MaxStepsForCreateNewGen == 0)
+    {
+        Reproduce();
+        Selection();
+    }
 }
 
 void World::Draw()

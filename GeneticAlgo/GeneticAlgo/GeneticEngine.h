@@ -11,8 +11,9 @@ protected:
     void Selection();
     bool CheckSolution();
     Object * Mutation(const Object * const obj);
+    std::vector<std::pair<size_t, int>> * GetObjectsByType(const std::vector<Object *> & objects, const ObjType & type);
 protected:
-    std::list<Object *> m_Objects;
-    std::list<Object *> m_NewObjects;
+    std::vector<Object *> m_Objects;
+    std::vector<Object *> m_NewObjects;
 };
 
